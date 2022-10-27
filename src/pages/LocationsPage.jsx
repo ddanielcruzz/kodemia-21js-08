@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LocationCard } from "./LocationCard";
+import { LocationCard } from "../components/LocationCard";
 import { DefaultRickymoryLayout } from "../layouts/DefaultRickymoryLayout";
 /*
 {
@@ -22,7 +22,7 @@ info: {}
   ]
 }
 */
-export const Locations = () => {
+export const LocationsPage = () => {
   const [locations, setLocations] = useState([]);
   useEffect(() => {
     fetch("https://rickandmortyapi.com/api/location")
@@ -34,8 +34,10 @@ export const Locations = () => {
       {locations.map((element) => (
         <LocationCard
           key={element.id}
+          id={element.id}
           name={element.name}
           type={element.type}
+          showButton
         />
       ))}
     </DefaultRickymoryLayout>

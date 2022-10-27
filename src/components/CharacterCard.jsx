@@ -1,6 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export const CharacterCard = ({ id, name, status, species, image }) => {
+export const CharacterCard = ({
+  id,
+  name,
+  status,
+  species,
+  image,
+  showButton,
+}) => {
   const getStylesByStatus = (status) => {
     if (status === "Alive") {
       return "text-green-500";
@@ -10,15 +18,20 @@ export const CharacterCard = ({ id, name, status, species, image }) => {
     }
     return "text-yellow-500";
   };
+
   return (
     <article className="bg-zinc-900 text-white p-20 w-[500px] rounded-md flex flex-col space-y-4">
       <img src={image} alt="" />
       <h1 className="text-xl font-bold">{name}</h1>
       <p className={getStylesByStatus(status)}>{status}</p>
       <p>{species}</p>
-      <button className="bg-purple-400 text-purple-900 rounded-md py-4 cursor-pointer">
-        Go to character page
-      </button>
+      {showButton && (
+        <Link to={`/characters/${id}`}>
+          <a className="bg-purple-400 text-purple-900 rounded-md p-4 cursor-pointer">
+            Go to character page
+          </a>
+        </Link>
+      )}
     </article>
   );
 };
